@@ -15,12 +15,12 @@ public class Aeropuerto implements Comparable<Aeropuerto> {
 
     private String codigo;
     private String nombre;
-    Cola<Vuelo> vuelosPendientes;
-    
+    private Cola<Vuelo> vuelosPendientes;
 
     public Aeropuerto(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.vuelosPendientes = new Cola<>();
     }
 
     public String getCodigo() {
@@ -37,6 +37,10 @@ public class Aeropuerto implements Comparable<Aeropuerto> {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Cola<Vuelo> getVuelosPendientes() {
+        return vuelosPendientes;
     }
 
     @Override
@@ -63,7 +67,5 @@ public class Aeropuerto implements Comparable<Aeropuerto> {
     public String toString() {
         return this.codigo + ";" + this.nombre;
     }
-    
-    
 
 }

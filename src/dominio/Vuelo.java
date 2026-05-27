@@ -5,7 +5,7 @@
 package dominio;
 
 import java.util.Objects;
-import sistemaViajes.Categoria;
+import sistemaViajes.Estado;
 
 /**
  *
@@ -13,63 +13,77 @@ import sistemaViajes.Categoria;
  */
 public class Vuelo implements Comparable<Vuelo> {
 
-    private String cedula;
-    private String nombre;
-    private int edad;
-    Categoria categoria;
+    private String codigoAeropuertoOrigen;
+    private String codigoAeropuertoDestino;
+    private String codigoDeVuelo;
+    private int capacidad;
+    private int costoEnDolares;
+    private Estado estado;
+    private int cantidadDeReservas;
+    private int cantidadDePasajerosConfirmados;
 
-    public Vuelo(String cedula, String nombre, int edad, Categoria categoria) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.edad = edad;
-        this.categoria = categoria;
+    public Vuelo(String codigoAeropuertoOrigen, String codigoAeropuertoDestino, String codigoDeVuelo, int capacidad, int costoEnDolares) {
+        this.codigoAeropuertoOrigen = codigoAeropuertoOrigen;
+        this.codigoAeropuertoDestino = codigoAeropuertoDestino;
+        this.codigoDeVuelo = codigoDeVuelo;
+        this.capacidad = capacidad;
+        this.costoEnDolares = costoEnDolares;
+        this.estado = estado.PROGRAMADO;
+        this.cantidadDeReservas = 0;
+        this.cantidadDePasajerosConfirmados = 0;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getCodigoAeropuertoOrigen() {
+        return codigoAeropuertoOrigen;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCodigoAeropuertoOrigen(String codigoAeropuertoOrigen) {
+        this.codigoAeropuertoOrigen = codigoAeropuertoOrigen;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCodigoAeropuertoDestino() {
+        return codigoAeropuertoDestino;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCodigoAeropuertoDestino(String codigoAeropuertoDestino) {
+        this.codigoAeropuertoDestino = codigoAeropuertoDestino;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getCodigoDeVuelo() {
+        return codigoDeVuelo;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setCodigoDeVuelo(String codigoDeVuelo) {
+        this.codigoDeVuelo = codigoDeVuelo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public int getCapacidad() {
+        return capacidad;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
 
-    public int compareTo(Vuelo pasajero) {
-        String cedula
-                = this.cedula.replace(".", "")
-                        .replace("-", "");
+    public int getCostoEnDolares() {
+        return costoEnDolares;
+    }
 
-        String cedula2
-                = pasajero.cedula.replace(".", "")
-                        .replace("-", "");
+    public void setCostoEnDolares(int costoEnDolares) {
+        this.costoEnDolares = costoEnDolares;
+    }
 
-        int cedula1Nro = Integer.parseInt(cedula);
-        int cedula2Nro = Integer.parseInt(cedula2);
+    public Estado getEstado() {
+        return estado;
+    }
 
-        return Integer.compare(cedula1Nro, cedula2Nro);
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public int compareTo(Vuelo o) {
+        return this.codigoDeVuelo.compareTo(o.codigoDeVuelo);
     }
 
     @Override
@@ -84,12 +98,12 @@ public class Vuelo implements Comparable<Vuelo> {
             return false;
         }
         final Vuelo other = (Vuelo) obj;
-        return Objects.equals(this.cedula, other.cedula);
+        return Objects.equals(this.codigoDeVuelo, other.codigoDeVuelo);
     }
 
     @Override
     public String toString() {
-        return cedula + ";" + nombre + ";" + edad + ";" + categoria.getTexto();
+        return "Vuelo{" + "codigoAeropuertoOrigen=" + codigoAeropuertoOrigen + ", codigoAeropuertoDestino=" + codigoAeropuertoDestino + ", codigoDeVuelo=" + codigoDeVuelo + ", capacidad=" + capacidad + ", costoEnDolares=" + costoEnDolares + ", estado=" + estado + ", cantidadDeReservas=" + cantidadDeReservas + ", cantidadDePasajerosConfirmados=" + cantidadDePasajerosConfirmados + '}';
     }
 
 }

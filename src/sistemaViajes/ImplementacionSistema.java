@@ -3,6 +3,7 @@ package sistemaViajes;
 //Álvaro Germán Pérez Hernández - 234980
 import dominio.Pasajero;
 import dominio.Aeropuerto;
+import dominio.Vuelo;
 import tads.tadlista.ListaNodosSimple;
 import tads.Nodo;
 
@@ -11,12 +12,15 @@ public class ImplementacionSistema implements Sistema {
 
     private ListaNodosSimple<Pasajero> listaPasajerSimple;
     private ListaNodosSimple<Aeropuerto> listaAeropuertosSimple;
+    private ListaNodosSimple<Vuelo> listaVuelosSimple;
 
     @Override
     public Retorno inicializarSistema() {
 
         listaPasajerSimple = new ListaNodosSimple();
         listaAeropuertosSimple = new ListaNodosSimple();
+        listaVuelosSimple = new ListaNodosSimple();
+
         return Retorno.ok();
     }
 
@@ -178,7 +182,35 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno registrarVuelo(String codigoAeropuertoOrigen, String codigoAeropuertoDestino, String codigoDeVuelo, int capacidad, int costoEnDolares) {
-        return Retorno.noImplementada();
+
+        if (capacidad <= 0 || costoEnDolares <= 0) {
+            return Retorno.error1();
+        }
+
+        if (codigoAeropuertoOrigen == null || codigoAeropuertoOrigen.trim().isEmpty()
+                || codigoAeropuertoDestino == null || codigoAeropuertoDestino.trim().isEmpty()
+                || codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
+            return Retorno.error2();
+        }
+
+        Aeropuerto aeropuertoOrigen = new Aeropuerto(codigoAeropuertoOrigen, "");
+        if (!listaAeropuertosSimple.existeElemento(aeropuertoOrigen)) {
+            return Retorno.error3();
+        }
+
+        Aeropuerto aeropuertoDestino = new Aeropuerto(codigoAeropuertoDestino, "");
+        if (!listaAeropuertosSimple.existeElemento(aeropuertoDestino)) {
+            return Retorno.error4();
+        }
+
+        Vuelo vuelo = new Vuelo(codigoAeropuertoOrigen, codigoAeropuertoDestino, codigoDeVuelo, capacidad, costoEnDolares);
+        if (listaVuelosSimple.existeElemento(vuelo)) {
+            return Retorno.error5();
+        }
+
+        listaVuelosSimple.agregarOrd(vuelo);
+        return Retorno.ok("Vuelo registrado exitosamente");
+
     }
 
     @Override

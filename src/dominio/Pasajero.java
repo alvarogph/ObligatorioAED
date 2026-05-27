@@ -16,7 +16,7 @@ public class Pasajero implements Comparable<Pasajero> {
     private String cedula;
     private String nombre;
     private int edad;
-    Categoria categoria;
+    private Categoria categoria;
 
     public Pasajero(String cedula, String nombre, int edad, Categoria categoria) {
         this.cedula = cedula;

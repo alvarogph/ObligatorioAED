@@ -14,7 +14,7 @@ public class Test05_RegistrarAeropuerto {
 
     @Before
     public void setUp() {
-        s.inicializarSistema();
+        s.inicializarSistema();    
     }
 
     @Test

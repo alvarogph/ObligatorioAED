@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import sistemaViajes.Sistema;
 
-public class Test06_BuscarAeropuerto {
+public class Test06_ObtenerAeropuerto {
 
     private Retorno retorno;
     private final Sistema s = new ImplementacionSistema();
