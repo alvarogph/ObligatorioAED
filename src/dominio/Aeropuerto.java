@@ -5,7 +5,7 @@
 package dominio;
 
 import java.util.Objects;
-import sistemaViajes.Categoria;
+import tads.tadcola.Cola;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Aeropuerto implements Comparable<Aeropuerto> {
 
     private String codigo;
     private String nombre;
-    //Cola<Vuelo> vuelosPendientes;
+    Cola<Vuelo> vuelosPendientes;
     
 
     public Aeropuerto(String codigo, String nombre) {

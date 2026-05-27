@@ -2,16 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package tads;
+package tads.tadlista;
+
+import tads.Nodo;
 
 /**
  *
  * @author alvar
  */
-public class ListaNodosSimple<T extends Comparable> implements IListaSimple<T> {
+public class ListaNodosSimple <T extends Comparable<T>>implements IListaSimple<T> {
 
     private Nodo<T> inicio;
-    private Nodo fin;
+    private Nodo<T> fin;
     private int cantidad;
 
     public ListaNodosSimple() {
@@ -74,7 +76,7 @@ public class ListaNodosSimple<T extends Comparable> implements IListaSimple<T> {
     @Override
     public boolean existeElemento(T t) {
 
-        Nodo aux = inicio;
+        Nodo<T> aux = inicio;
         boolean existe = false;
 
         while (aux != null && !existe) {
@@ -237,7 +239,7 @@ public class ListaNodosSimple<T extends Comparable> implements IListaSimple<T> {
     
     public T obtenerElemento(T t) {
 
-    Nodo aux = inicio;
+    Nodo<T> aux = inicio;
 
     while (aux != null) {
 

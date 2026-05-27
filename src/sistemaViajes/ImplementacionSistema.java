@@ -3,7 +3,7 @@ package sistemaViajes;
 //Álvaro Germán Pérez Hernández - 234980
 import dominio.Pasajero;
 import dominio.Aeropuerto;
-import tads.ListaNodosSimple;
+import tads.tadlista.ListaNodosSimple;
 import tads.Nodo;
 
 //testGitsdsds
