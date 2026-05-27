@@ -7,46 +7,39 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import sistemaViajes.Sistema;
 
-public class Test06_ObtenerAeropuerto {
+public class Test08_ObtenerVuelo {
 
     private Retorno retorno;
     private final Sistema s = new ImplementacionSistema();
 
-    @Before
+   @Before
     public void setUp() {
         s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");
+        s.registrarVuelo("MVD", "EZE", "LA100", 150, 200);
     }
 
     @Test
-    public void obtenerAeropuertoOk() {
-        retorno = s.obtenerAeropuerto("MVD");
+    public void obtenerInformacionDeVueloOk() {
+        retorno = s.obtenerInformacionDeVuelo("LA100");
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
-        assertEquals("MVD;Carrasco", retorno.getValorString());
-        assertEquals(0, retorno.getValorEntero());
-
-        retorno = s.obtenerAeropuerto("EZE");
-        assertEquals(Retorno.Resultado.OK, retorno.getResultado());
-        assertEquals("EZE;Ministro Pistarini", retorno.getValorString());
-        assertEquals(0, retorno.getValorEntero());
+        assertEquals("MVD;EZE;LA100;150;200;PROGRAMADO;0;0", retorno.getValorString());
     }
 
     @Test
-    public void obtenerAeropuertoError01() {
-        retorno = s.obtenerAeropuerto("");
+    public void obtenerInformacionDeVueloError01() {
+        retorno = s.obtenerInformacionDeVuelo("");
         assertEquals(Retorno.Resultado.ERROR_1, retorno.getResultado());
-        retorno = s.obtenerAeropuerto(null);
+        retorno = s.obtenerInformacionDeVuelo(null);
         assertEquals(Retorno.Resultado.ERROR_1, retorno.getResultado());
-        retorno = s.obtenerAeropuerto("   ");
+        retorno = s.obtenerInformacionDeVuelo("   ");
         assertEquals(Retorno.Resultado.ERROR_1, retorno.getResultado());
     }
 
     @Test
-    public void obtenerAeropuertoError02() {
-        retorno = s.obtenerAeropuerto("GRU");
-        assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
-        retorno = s.obtenerAeropuerto("XXX");
+    public void obtenerInformacionDeVueloError02() {
+        retorno = s.obtenerInformacionDeVuelo("XX999");
         assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
     }
 }

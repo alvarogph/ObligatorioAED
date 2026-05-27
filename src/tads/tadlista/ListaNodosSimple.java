@@ -10,7 +10,7 @@ import tads.Nodo;
  *
  * @author alvar
  */
-public class ListaNodosSimple <T extends Comparable<T>>implements IListaSimple<T> {
+public class ListaNodosSimple<T extends Comparable<T>> implements IListaSimple<T> {
 
     private Nodo<T> inicio;
     private Nodo<T> fin;
@@ -236,21 +236,16 @@ public class ListaNodosSimple <T extends Comparable<T>>implements IListaSimple<T
     public int cantidadElementos() {
         return this.cantidad;
     }
-    
+
     public T obtenerElemento(T t) {
-
-    Nodo<T> aux = inicio;
-
-    while (aux != null) {
-
-        if (aux.getDato().equals(t)) {
-            return t; 
+        Nodo<T> aux = inicio;
+        while (aux != null) {
+            if (aux.getDato().equals(t)) {
+                return aux.getDato(); 
+            }
+            aux = aux.getSiguiente();
         }
-
-        aux = aux.getSiguiente();
+        return null;
     }
-
-    return null;
-}
 
 }

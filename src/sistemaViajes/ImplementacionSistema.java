@@ -166,18 +166,11 @@ public class ImplementacionSistema implements Sistema {
         if (codigo == null || codigo.trim().isEmpty()) {
             return Retorno.error1();
         }
-
-        for (int i = 0; i < listaAeropuertosSimple.cantidadElementos(); i++) {
-
-            Aeropuerto aeropuerto = listaAeropuertosSimple.obtenerElementoIndice(i);
-
-            if (aeropuerto.getCodigo().equals(codigo)) {
-
-                return Retorno.ok(aeropuerto.toString());
-            }
+        Aeropuerto aeropuerto = listaAeropuertosSimple.obtenerElemento(new Aeropuerto(codigo, ""));
+        if (aeropuerto == null) {
+            return Retorno.error2();
         }
-
-        return Retorno.error2();
+        return Retorno.ok(aeropuerto.toString(), aeropuerto.getVuelosPendientes().cantElementos());
     }
 
     @Override
@@ -215,7 +208,22 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno obtenerInformacionDeVuelo(String codigoDeVuelo) {
-        return Retorno.noImplementada();
+
+        if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
+            return Retorno.error1();
+        }
+
+        for (int i = 0; i < listaVuelosSimple.cantidadElementos(); i++) {
+
+            Vuelo vuelo = listaVuelosSimple.obtenerElementoIndice(i);
+
+            if (vuelo.getCodigoDeVuelo().equals(codigoDeVuelo)) {
+
+                return Retorno.ok(vuelo.toString());
+            }
+        }
+
+        return Retorno.error2();
     }
 
     @Override
