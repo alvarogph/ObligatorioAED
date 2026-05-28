@@ -253,7 +253,35 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno cerrarVuelo(String codigoDeVuelo) {
-        return Retorno.noImplementada();
+        
+        if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
+            return Retorno.error1();
+        }
+        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+        while (aux != null) {
+            Vuelo vuelo = aux.getDato();
+            if (vuelo.getCodigoDeVuelo().equals(codigoDeVuelo)) {
+                if (vuelo.getEstado() != Estado.ABIERTO) {
+                    return Retorno.error3();
+                }
+                vuelo.setEstado(Estado.CERRADO);
+                Aeropuerto aeropuertoOrigen = listaAeropuertosSimple.obtenerElemento(new Aeropuerto(vuelo.getCodigoAeropuertoOrigen(), ""));
+                aeropuertoOrigen.getVuelosPendientes().encolar(vuelo);
+                String confirmados = "";
+                Nodo<Pasajero> auxPas = vuelo.getPasajerosConfirmados().getInicio();
+                while (auxPas != null) {
+                    if (!confirmados.isEmpty()) {
+                        confirmados += "|";
+                    }
+                    confirmados += auxPas.getDato().toString();
+                    auxPas = auxPas.getSiguiente();
+                }
+                int sinConfirmar = vuelo.getPasajerosConReserva().cantidadElementos();
+                return Retorno.ok(confirmados, sinConfirmar);
+            }
+            aux = aux.getSiguiente();
+        }
+        return Retorno.error2();
     }
 
     @Override

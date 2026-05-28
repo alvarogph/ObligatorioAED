@@ -6,6 +6,7 @@ package dominio;
 
 import java.util.Objects;
 import sistemaViajes.Estado;
+import tads.tadlista.ListaNodosSimple;
 
 /**
  *
@@ -19,8 +20,8 @@ public class Vuelo implements Comparable<Vuelo> {
     private int capacidad;
     private int costoEnDolares;
     private Estado estado;
-    private int cantidadDeReservas;
-    private int cantidadDePasajerosConfirmados;
+    private ListaNodosSimple<Pasajero> pasajerosConReserva;
+    private ListaNodosSimple<Pasajero> pasajerosConfirmados;
 
     public Vuelo(String codigoAeropuertoOrigen, String codigoAeropuertoDestino, String codigoDeVuelo, int capacidad, int costoEnDolares) {
         this.codigoAeropuertoOrigen = codigoAeropuertoOrigen;
@@ -29,8 +30,9 @@ public class Vuelo implements Comparable<Vuelo> {
         this.capacidad = capacidad;
         this.costoEnDolares = costoEnDolares;
         this.estado = estado.PROGRAMADO;
-        this.cantidadDeReservas = 0;
-        this.cantidadDePasajerosConfirmados = 0;
+        this.pasajerosConReserva = new ListaNodosSimple<>();
+        this.pasajerosConfirmados = new ListaNodosSimple<>();
+
     }
 
     public String getCodigoAeropuertoOrigen() {
@@ -101,6 +103,14 @@ public class Vuelo implements Comparable<Vuelo> {
         return Objects.equals(this.codigoDeVuelo, other.codigoDeVuelo);
     }
 
+    public ListaNodosSimple<Pasajero> getPasajerosConReserva() {
+        return pasajerosConReserva;
+    }
+
+    public ListaNodosSimple<Pasajero> getPasajerosConfirmados() {
+        return pasajerosConfirmados;
+    }
+
     @Override
     public String toString() {
 
@@ -110,8 +120,8 @@ public class Vuelo implements Comparable<Vuelo> {
                 + capacidad + ";"
                 + costoEnDolares + ";"
                 + estado + ";"
-                + cantidadDeReservas + ";"
-                + cantidadDePasajerosConfirmados;
+                + pasajerosConReserva.cantidadElementos() + ";"
+                + pasajerosConfirmados.cantidadElementos();
     }
 
 }
