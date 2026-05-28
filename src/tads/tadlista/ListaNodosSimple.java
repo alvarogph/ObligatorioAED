@@ -25,6 +25,10 @@ public class ListaNodosSimple<T extends Comparable<T>> implements IListaSimple<T
     public boolean esVacia() {
         return this.cantidad == 0;
     }
+    
+    public Nodo<T> getInicio() {
+    return this.inicio;
+}
 
     @Override
     public void agregarInicio(T n) {

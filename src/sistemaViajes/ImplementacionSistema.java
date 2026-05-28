@@ -6,6 +6,7 @@ import dominio.Aeropuerto;
 import dominio.Vuelo;
 import tads.tadlista.ListaNodosSimple;
 import tads.Nodo;
+import tads.tadpila.Pila;
 
 //testGitsdsds
 public class ImplementacionSistema implements Sistema {
@@ -13,6 +14,10 @@ public class ImplementacionSistema implements Sistema {
     private ListaNodosSimple<Pasajero> listaPasajerSimple;
     private ListaNodosSimple<Aeropuerto> listaAeropuertosSimple;
     private ListaNodosSimple<Vuelo> listaVuelosSimple;
+    private ListaNodosSimple<Pasajero> listaPlatino;
+    private ListaNodosSimple<Pasajero> listaFrecuente;
+    private ListaNodosSimple<Pasajero> listaEstandar;
+    private ListaNodosSimple<Pasajero> listaEsporadico;
 
     @Override
     public Retorno inicializarSistema() {
@@ -20,6 +25,10 @@ public class ImplementacionSistema implements Sistema {
         listaPasajerSimple = new ListaNodosSimple();
         listaAeropuertosSimple = new ListaNodosSimple();
         listaVuelosSimple = new ListaNodosSimple();
+        listaPlatino = new ListaNodosSimple<>();
+        listaFrecuente = new ListaNodosSimple<>();
+        listaEstandar = new ListaNodosSimple<>();
+        listaEsporadico = new ListaNodosSimple<>();
 
         return Retorno.ok();
     }
@@ -46,6 +55,16 @@ public class ImplementacionSistema implements Sistema {
         } else {
 
             listaPasajerSimple.agregarOrd(pasajero);
+
+            if (categoria == Categoria.PLATINO) {
+                listaPlatino.agregarOrd(pasajero);
+            } else if (categoria == Categoria.FRECUENTE) {
+                listaFrecuente.agregarOrd(pasajero);
+            } else if (categoria == Categoria.ESTANDAR) {
+                listaEstandar.agregarOrd(pasajero);
+            } else if (categoria == Categoria.ESPORADICO) {
+                listaEsporadico.agregarOrd(pasajero);
+            }
             return Retorno.ok("Pasajero registrado exitosamente");
         }
     }
@@ -56,16 +75,13 @@ public class ImplementacionSistema implements Sistema {
         if (!cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
             return Retorno.error1();
         }
-
-        for (int i = 0; i < listaPasajerSimple.cantidadElementos(); i++) {
-
-            Pasajero p = listaPasajerSimple.obtenerElementoIndice(i);
-
-            if (p.getCedula().equals(cedula)) {
-                return Retorno.ok(p.toString());
+        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        while (aux != null) {
+            if (aux.getDato().getCedula().equals(cedula)) {
+                return Retorno.ok(aux.getDato().toString());
             }
+            aux = aux.getSiguiente();
         }
-
         return Retorno.error2();
 
     }
@@ -73,72 +89,61 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno listarPasajerosAscendente() {
 
-        if (listaPasajerSimple.esVacia()) {
-            return Retorno.ok("");
-        }
-
         String pasajeros = "";
-
-        for (int i = 0; i < listaPasajerSimple.cantidadElementos(); i++) {
-
-            Pasajero p = listaPasajerSimple.obtenerElementoIndice(i);
-
-            if (i > 0) {
+        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        while (aux != null) {
+            if (!pasajeros.isEmpty()) {
                 pasajeros += "|";
             }
-
-            pasajeros += p.toString();
+            pasajeros += aux.getDato().toString();
+            aux = aux.getSiguiente();
         }
-
         return Retorno.ok(pasajeros);
     }
 
     @Override
     public Retorno listarPasajerosDescendente() {
 
-        if (listaPasajerSimple.esVacia()) {
-            return Retorno.ok("");
+        Pila<Pasajero> pila = new Pila<>();
+        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        while (aux != null) {
+            pila.apilar(aux.getDato());
+            aux = aux.getSiguiente();
         }
-
         String pasajeros = "";
-
-        for (int i = listaPasajerSimple.cantidadElementos() - 1; i >= 0; i--) {
-
-            Pasajero p = listaPasajerSimple.obtenerElementoIndice(i);
-
-            if (i < listaPasajerSimple.cantidadElementos() - 1) {
+        while (!pila.esVacia()) {
+            if (!pasajeros.isEmpty()) {
                 pasajeros += "|";
             }
-
-            pasajeros += p.toString();
+            pasajeros += pila.top().toString();
+            pila.desapilar();
         }
-
         return Retorno.ok(pasajeros);
     }
 
     @Override
     public Retorno listarPasajerosPorCategoría(Categoria unaCategoria) {
 
+        ListaNodosSimple<Pasajero> lista;
+
+        if (unaCategoria == Categoria.PLATINO) {
+            lista = listaPlatino;
+        } else if (unaCategoria == Categoria.FRECUENTE) {
+            lista = listaFrecuente;
+        } else if (unaCategoria == Categoria.ESTANDAR) {
+            lista = listaEstandar;
+        } else {
+            lista = listaEsporadico;
+        }
         String pasajeros = "";
-
-        for (int i = 0; i < listaPasajerSimple.cantidadElementos(); i++) {
-
-            Pasajero p = listaPasajerSimple.obtenerElementoIndice(i);
-
-            if (p.getCategoria().equals(unaCategoria)) {
-
-                if (!pasajeros.equals("")) {
-                    pasajeros += "|";
-                }
-
-                pasajeros += p.toString();
+        Nodo<Pasajero> aux = lista.getInicio();
+        while (aux != null) {
+            if (!pasajeros.isEmpty()) {
+                pasajeros += "|";
             }
+            pasajeros += aux.getDato().toString();
+            aux = aux.getSiguiente();
         }
-
-        if (pasajeros.equals("")) {
-            return Retorno.ok("No existen pasajeros para la categoria seleccionada");
-        }
-
         return Retorno.ok(pasajeros);
     }
 

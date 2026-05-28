@@ -97,7 +97,7 @@ public class Test04_ListarPasajeros {
 
         retorno = s.listarPasajerosPorCategoría(Categoria.FRECUENTE);
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
-        assertEquals("No existen pasajeros para la categoria seleccionada", retorno.getValorString());
+        assertEquals("", retorno.getValorString());
     }
 
     @Test
