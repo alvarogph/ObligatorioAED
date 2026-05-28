@@ -8,7 +8,6 @@ import tads.tadlista.ListaNodosSimple;
 import tads.Nodo;
 import tads.tadpila.Pila;
 
-//testGitsdsds
 public class ImplementacionSistema implements Sistema {
 
     private ListaNodosSimple<Pasajero> listaPasajerSimple;
@@ -43,7 +42,7 @@ public class ImplementacionSistema implements Sistema {
         }
 
         if (!cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
-            return Retorno.error2();
+            return Retorno.error2(); //Se uso IA GPT para hacer la validación de la cédula al formato Uruguayo.
         }
 
         if (edad < 0) {
@@ -83,7 +82,6 @@ public class ImplementacionSistema implements Sistema {
             aux = aux.getSiguiente();
         }
         return Retorno.error2();
-
     }
 
     @Override
@@ -122,21 +120,21 @@ public class ImplementacionSistema implements Sistema {
     }
 
     @Override
-    public Retorno listarPasajerosPorCategoría(Categoria unaCategoria) {
+    public Retorno listarPasajerosPorCategoría(Categoria categoria) {
 
-        ListaNodosSimple<Pasajero> lista;
+        ListaNodosSimple<Pasajero> listaPasajeros;
 
-        if (unaCategoria == Categoria.PLATINO) {
-            lista = listaPlatino;
-        } else if (unaCategoria == Categoria.FRECUENTE) {
-            lista = listaFrecuente;
-        } else if (unaCategoria == Categoria.ESTANDAR) {
-            lista = listaEstandar;
+        if (categoria == Categoria.PLATINO) {
+            listaPasajeros = listaPlatino;
+        } else if (categoria == Categoria.FRECUENTE) {
+            listaPasajeros = listaFrecuente;
+        } else if (categoria == Categoria.ESTANDAR) {
+            listaPasajeros = listaEstandar;
         } else {
-            lista = listaEsporadico;
+            listaPasajeros = listaEsporadico;
         }
         String pasajeros = "";
-        Nodo<Pasajero> aux = lista.getInicio();
+        Nodo<Pasajero> aux = listaPasajeros.getInicio();
         while (aux != null) {
             if (!pasajeros.isEmpty()) {
                 pasajeros += "|";
@@ -213,27 +211,44 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno obtenerInformacionDeVuelo(String codigoDeVuelo) {
-
         if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
             return Retorno.error1();
         }
-
-        for (int i = 0; i < listaVuelosSimple.cantidadElementos(); i++) {
-
-            Vuelo vuelo = listaVuelosSimple.obtenerElementoIndice(i);
-
-            if (vuelo.getCodigoDeVuelo().equals(codigoDeVuelo)) {
-
-                return Retorno.ok(vuelo.toString());
+        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+        while (aux != null) {
+            if (aux.getDato().getCodigoDeVuelo().equals(codigoDeVuelo)) {
+                return Retorno.ok(aux.getDato().toString());
             }
+            aux = aux.getSiguiente();
         }
-
         return Retorno.error2();
     }
 
     @Override
     public Retorno abrirVuelo(String codigoDeVuelo) {
-        return Retorno.noImplementada();
+
+        if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
+            return Retorno.error1();
+        }
+
+        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+
+        while (aux != null) {
+            if (aux.getDato().getCodigoDeVuelo().equals(codigoDeVuelo)) {
+
+                if (aux.getDato().getEstado() != Estado.PROGRAMADO) {
+                    return Retorno.error3();
+                } else {
+
+                    aux.getDato().setEstado(Estado.ABIERTO);
+                    return Retorno.ok();
+                }
+            }
+
+            aux = aux.getSiguiente();
+        }
+
+        return Retorno.error2();
     }
 
     @Override

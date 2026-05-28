@@ -3,6 +3,7 @@ package tads.tadcola;
 import tads.Nodo;
 
 public class Cola<T> implements ICola<T> {
+
     private Nodo<T> cola;
     private Nodo<T> fin;
     private int cantidad;
@@ -15,30 +16,30 @@ public class Cola<T> implements ICola<T> {
 
     @Override
     public boolean esVacia() {
-         return this.cantidad == 0;
+        return this.cantidad == 0;
     }
 
     @Override
     public void encolar(T n) {
         Nodo<T> nuevo = new Nodo(n);
         nuevo.setSiguiente(null);
-        
-        if(this.esVacia()){
+
+        if (this.esVacia()) {
             this.cola = nuevo;
-        }else{
+        } else {
             this.fin.setSiguiente(nuevo);
         }
-        
+
         this.fin = nuevo;
         this.cantidad++;
     }
 
     @Override
     public void desencolar() {
-        if(!this.esVacia()){
-            if(this.cantidad == 1){
+        if (!this.esVacia()) {
+            if (this.cantidad == 1) {
                 this.vaciar();
-            }else{
+            } else {
                 Nodo<T> aBorrar = this.cola;
                 this.cola = this.cola.getSiguiente();
                 aBorrar.setSiguiente(null);
@@ -51,7 +52,7 @@ public class Cola<T> implements ICola<T> {
     public T front() {
         return this.cola.getDato();
     }
-    
+
     @Override
     public void vaciar() {
         this.cola = null;
@@ -64,18 +65,16 @@ public class Cola<T> implements ICola<T> {
         return this.cantidad;
     }
 
-    
-    // Solamente a modo de desarrollo, no es una operación válida
     @Override
     public void mostrar() {
         Nodo<T> aux = this.cola;
-        
-        while(aux != null){
+
+        while (aux != null) {
             System.out.print(aux.getDato() + " ");
             aux = aux.getSiguiente();
         }
-        
+
         System.out.println("");
     }
-    
+
 }

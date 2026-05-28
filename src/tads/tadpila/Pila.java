@@ -55,8 +55,6 @@ public class Pila<T> implements IPila<T> {
         return this.cantidad;
     }
 
-
-    // Solamente a modo de desarrollo, no es una operación válida
     @Override
     public void mostrar() {
         Nodo<T> aux = this.pila;

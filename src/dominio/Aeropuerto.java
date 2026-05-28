@@ -49,7 +49,7 @@ public class Aeropuerto implements Comparable<Aeropuerto> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) { //Este equals, utilizado en todas las clases se lo solicité a la IA.
         if (this == obj) {
             return true;
         }

@@ -103,7 +103,7 @@ public class Vuelo implements Comparable<Vuelo> {
 
     @Override
     public String toString() {
-        
+
         return codigoAeropuertoOrigen + ";"
                 + codigoAeropuertoDestino + ";"
                 + codigoDeVuelo + ";"

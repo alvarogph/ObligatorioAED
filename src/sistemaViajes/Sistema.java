@@ -1,7 +1,5 @@
 package sistemaViajes;
 
-import dominio.Pasajero;
-
 public interface Sistema {
 
     Retorno inicializarSistema();

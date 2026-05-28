@@ -57,16 +57,14 @@ public class Pasajero implements Comparable<Pasajero> {
         this.categoria = categoria;
     }
 
+    @Override
     public int compareTo(Pasajero pasajero) {
-        String cedula
-                = this.cedula.replace(".", "")
-                        .replace("-", "");
+        
+        String cedula1 = this.cedula.replace(".", "").replace("-", "");
 
-        String cedula2
-                = pasajero.cedula.replace(".", "")
-                        .replace("-", "");
+        String cedula2 = pasajero.cedula.replace(".", "").replace("-", "");
 
-        int cedula1Nro = Integer.parseInt(cedula);
+        int cedula1Nro = Integer.parseInt(cedula1);
         int cedula2Nro = Integer.parseInt(cedula2);
 
         return Integer.compare(cedula1Nro, cedula2Nro);
