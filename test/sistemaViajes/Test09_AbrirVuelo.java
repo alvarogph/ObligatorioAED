@@ -10,7 +10,7 @@ public class Test09_AbrirVuelo {
     private final Sistema s = new ImplementacionSistema();
 
     @Before
-    public void setUp() {
+    public void setUp() { //HACER NUEVOS TESTS CUANDO ESTE PRONTO REALIZAR RESERVA Y REALIZAR CHECK-IN.
         s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");

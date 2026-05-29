@@ -253,7 +253,7 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno cerrarVuelo(String codigoDeVuelo) {
-        
+
         if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
             return Retorno.error1();
         }
@@ -286,7 +286,37 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno realizarReserva(String codigoDeVuelo, String cedula) {
-        return Retorno.noImplementada();
+
+        if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()
+                || cedula == null || cedula.trim().isEmpty()) {
+            return Retorno.error1();
+        }
+        if (!cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
+            return Retorno.error2();
+        }
+        Vuelo vueloBuscado = new Vuelo("", "", codigoDeVuelo, 1, 1);
+        Vuelo vuelo = listaVuelosSimple.obtenerElemento(vueloBuscado);
+        if (vuelo == null) {
+            return Retorno.error3();
+        }
+        Pasajero pasajeroBuscado = new Pasajero(cedula, "", 0, Categoria.ESPORADICO);
+        Pasajero pasajero = listaPasajerSimple.obtenerElemento(pasajeroBuscado);
+        if (pasajero == null) {
+            return Retorno.error4();
+        }
+        if (vuelo.getEstado() != Estado.PROGRAMADO && vuelo.getEstado() != Estado.ABIERTO) {
+            return Retorno.error5();
+        }
+        if (vuelo.tieneReserva(pasajero) || vuelo.tieneCheckIn(pasajero)) {
+            return Retorno.error6();
+        }
+        int limiteReservas = (int) Math.ceil(vuelo.getCapacidad() * 1.1); // Esta funcion se la pedi a Claude.
+        
+        if (vuelo.getPasajerosConReserva().cantidadElementos() >= limiteReservas) {
+            return Retorno.error7();
+        }
+        vuelo.getPasajerosConReserva().agregarOrd(pasajero);
+        return Retorno.ok();
     }
 
     @Override

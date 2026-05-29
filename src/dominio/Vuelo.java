@@ -124,4 +124,12 @@ public class Vuelo implements Comparable<Vuelo> {
                 + pasajerosConfirmados.cantidadElementos();
     }
 
+    public boolean tieneReserva(Pasajero p) {
+        return pasajerosConReserva.existeElemento(p);
+    }
+
+    public boolean tieneCheckIn(Pasajero p) {
+        return pasajerosConfirmados.existeElemento(p);
+    }
+
 }
