@@ -276,12 +276,12 @@ public class ImplementacionSistema implements Sistema {
                     confirmados += auxPas.getDato().toString();
                     auxPas = auxPas.getSiguiente();
                 }
-                
+
                 int sinConfirmar = vuelo.getPasajerosConReserva().cantidadElementos() - vuelo.getPasajerosConfirmados().cantidadElementos();
-                
+
                 return Retorno.ok(confirmados, sinConfirmar);
             }
-            
+
             aux = aux.getSiguiente();
         }
         return Retorno.error2();
@@ -364,8 +364,32 @@ public class ImplementacionSistema implements Sistema {
     }
 
     @Override
+    
     public Retorno embarqueYDespegueDeVuelo(String codigoAeropuerto) {
-        return Retorno.noImplementada();
+
+        if (codigoAeropuerto == null || codigoAeropuerto.trim().isEmpty()) {
+            return Retorno.error1();
+        }
+
+        Aeropuerto aeropuertoBuscado = new Aeropuerto(codigoAeropuerto, "");
+        Aeropuerto aeropuerto = listaAeropuertosSimple.obtenerElemento(aeropuertoBuscado);
+
+        if (aeropuerto == null) {
+            return Retorno.error2();
+        }
+
+        if (aeropuerto.getVuelosPendientes().cantElementos() == 0) {
+            return Retorno.error3();
+        }
+
+        Vuelo vuelo = aeropuerto.getVuelosPendientes().front();
+        vuelo.setEstado(Estado.FINALIZADO);
+        aeropuerto.getVuelosPendientes().desencolar();
+        
+        String codigoVuelo = vuelo.getCodigoDeVuelo();
+        int vuelosCola = aeropuerto.getVuelosPendientes().cantElementos();
+
+        return Retorno.ok(codigoVuelo, vuelosCola);
     }
 
     @Override
