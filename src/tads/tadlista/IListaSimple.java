@@ -12,7 +12,7 @@ public interface IListaSimple<T> {
 
     public void agregarInicio(T t);
 
-    public void mostrar();
+   // public void mostrar();
 
     public int cantidadElementos();
 

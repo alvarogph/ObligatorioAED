@@ -71,7 +71,7 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno buscarPasajero(String cedula) {
 
-        if (!cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
+        if (cedula == null || !cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
             return Retorno.error1();
         }
         Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
@@ -364,7 +364,7 @@ public class ImplementacionSistema implements Sistema {
     }
 
     @Override
-    
+
     public Retorno embarqueYDespegueDeVuelo(String codigoAeropuerto) {
 
         if (codigoAeropuerto == null || codigoAeropuerto.trim().isEmpty()) {
@@ -385,7 +385,7 @@ public class ImplementacionSistema implements Sistema {
         Vuelo vuelo = aeropuerto.getVuelosPendientes().front();
         vuelo.setEstado(Estado.FINALIZADO);
         aeropuerto.getVuelosPendientes().desencolar();
-        
+
         String codigoVuelo = vuelo.getCodigoDeVuelo();
         int vuelosCola = aeropuerto.getVuelosPendientes().cantElementos();
 
@@ -394,7 +394,58 @@ public class ImplementacionSistema implements Sistema {
 
     @Override
     public Retorno consultaDisponibilidad(int[][] matriz, int cantidad, Clase unaClase) {
-        return Retorno.noImplementada();
+
+        if (cantidad <= 0) {
+            return Retorno.error1();
+        }
+        int filaDesde;
+        int filaHasta;
+
+        if (unaClase == Clase.PRIMERA) {
+            filaDesde = 0;
+            filaHasta = 2;
+        } else if (unaClase == Clase.EJECUTIVA) {
+            filaDesde = 3;
+            filaHasta = 9;
+        } else {
+            filaDesde = 10;
+            filaHasta = 25;
+        }
+
+        int columnas = matriz[0].length;
+        char[] letrasColumna = {'A', 'B', 'C', 'D', 'E', 'F'};
+        String resultado = "";
+        int opcionesDispo = 0;
+
+        for (int i = filaDesde; i <= filaHasta; i++) {
+            int libresSeguidos = 0;
+            for (int j = 0; j < columnas; j++) {
+                if (matriz[i][j] == 0) {
+                    libresSeguidos++;
+                } else {
+                    libresSeguidos = 0;
+                }
+                if (libresSeguidos >= cantidad) {
+                    String opcion = "";
+                    for (int k = j - cantidad + 1; k <= j; k++) {
+                        char letra = letrasColumna[k];
+                        int numeroFila = i + 1;
+                        String asiento = letra + "" + numeroFila;
+                        if (!opcion.isEmpty()) {
+                            opcion += "-";
+                        }
+                        opcion += asiento;
+                    }
+                    if (!resultado.isEmpty()) {
+                        resultado += "|";
+                    }
+                    resultado += opcion;
+                    opcionesDispo++;
+                }
+            }
+        }
+        
+        return Retorno.ok(resultado, opcionesDispo);
     }
 
 }

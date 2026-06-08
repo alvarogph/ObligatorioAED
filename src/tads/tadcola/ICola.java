@@ -14,5 +14,5 @@ public interface ICola<T> {
 
     public int cantElementos();
 
-    public void mostrar();
+    //public void mostrar();
 }

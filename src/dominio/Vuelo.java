@@ -29,7 +29,7 @@ public class Vuelo implements Comparable<Vuelo> {
         this.codigoDeVuelo = codigoDeVuelo;
         this.capacidad = capacidad;
         this.costoEnDolares = costoEnDolares;
-        this.estado = estado.PROGRAMADO;
+        this.estado = Estado.PROGRAMADO;
         this.pasajerosConReserva = new ListaNodosSimple<>();
         this.pasajerosConfirmados = new ListaNodosSimple<>();
 

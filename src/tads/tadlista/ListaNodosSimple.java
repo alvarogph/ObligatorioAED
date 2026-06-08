@@ -58,17 +58,17 @@ public class ListaNodosSimple<T extends Comparable<T>> implements IListaSimple<T
         }
     }
 
-    @Override
-    public void mostrar() {
-        Nodo<T> aux = this.inicio;
-
-        while (aux != null) {
-            System.out.print(aux.getDato() + " ");
-            aux = aux.getSiguiente();
-        }
-
-        System.out.println("");
-    }
+//    @Override
+//    public void mostrar() {
+//        Nodo<T> aux = this.inicio;
+//
+//        while (aux != null) {
+//            System.out.print(aux.getDato() + " ");
+//            aux = aux.getSiguiente();
+//        }
+//
+//        System.out.println("");
+//    }
 
     @Override
     public void vaciar() {

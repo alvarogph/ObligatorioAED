@@ -29,6 +29,19 @@ public class Test06_ObtenerAeropuerto {
         assertEquals(0, retorno.getValorEntero());
     }
 
+    public void obtenerAeropuertoOkConVuelosEnCola() {
+        s.registrarVuelo("MVD", "EZE", "LA100", 10, 200);
+        s.registrarVuelo("MVD", "EZE", "LA200", 10, 200);
+        s.abrirVuelo("LA100");
+        s.cerrarVuelo("LA100");
+        s.abrirVuelo("LA200");
+        s.cerrarVuelo("LA200");
+        retorno = s.obtenerAeropuerto("MVD");
+        assertEquals(Retorno.Resultado.OK, retorno.getResultado());
+        assertEquals("MVD;Carrasco", retorno.getValorString());
+        assertEquals(2, retorno.getValorEntero());
+    }
+
     @Test
     public void obtenerAeropuertoError01() {
         retorno = s.obtenerAeropuerto("");
@@ -46,4 +59,5 @@ public class Test06_ObtenerAeropuerto {
         retorno = s.obtenerAeropuerto("XXX");
         assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
     }
+
 }

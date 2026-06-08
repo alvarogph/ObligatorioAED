@@ -65,16 +65,16 @@ public class Cola<T> implements ICola<T> {
         return this.cantidad;
     }
 
-    @Override
-    public void mostrar() {
-        Nodo<T> aux = this.cola;
-
-        while (aux != null) {
-            System.out.print(aux.getDato() + " ");
-            aux = aux.getSiguiente();
-        }
-
-        System.out.println("");
-    }
+//    @Override
+//    public void mostrar() {
+//        Nodo<T> aux = this.cola;
+//
+//        while (aux != null) {
+//            System.out.print(aux.getDato() + " ");
+//            aux = aux.getSiguiente();
+//        }
+//
+//        System.out.println("");
+//    }
 
 }
