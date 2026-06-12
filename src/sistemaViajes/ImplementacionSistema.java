@@ -10,9 +10,9 @@ import tads.tadpila.Pila;
 
 public class ImplementacionSistema implements Sistema {
 
-    private ListaNodosSimple<Pasajero> listaPasajerSimple;
-    private ListaNodosSimple<Aeropuerto> listaAeropuertosSimple;
-    private ListaNodosSimple<Vuelo> listaVuelosSimple;
+    private ListaNodosSimple<Pasajero> listaPasajeros;
+    private ListaNodosSimple<Aeropuerto> listaAeropuertos;
+    private ListaNodosSimple<Vuelo> listaVuelos;
     private ListaNodosSimple<Pasajero> listaPlatino;
     private ListaNodosSimple<Pasajero> listaFrecuente;
     private ListaNodosSimple<Pasajero> listaEstandar;
@@ -21,9 +21,9 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno inicializarSistema() {
 
-        listaPasajerSimple = new ListaNodosSimple();
-        listaAeropuertosSimple = new ListaNodosSimple();
-        listaVuelosSimple = new ListaNodosSimple();
+        listaPasajeros = new ListaNodosSimple<>();
+        listaAeropuertos = new ListaNodosSimple<>();
+        listaVuelos = new ListaNodosSimple<>();
         listaPlatino = new ListaNodosSimple<>();
         listaFrecuente = new ListaNodosSimple<>();
         listaEstandar = new ListaNodosSimple<>();
@@ -42,18 +42,18 @@ public class ImplementacionSistema implements Sistema {
         }
 
         if (!cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
-            return Retorno.error2(); //Se uso IA GPT para hacer la validación de la cédula al formato Uruguayo.
+            return Retorno.error2(); //Se uso IA GPT para consultar la forma de validación de una cédula en formato Uruguayo.
         }
 
         if (edad < 0) {
             return Retorno.error3();
         }
 
-        if (listaPasajerSimple.existeElemento(pasajero)) {
+        if (listaPasajeros.existeElemento(pasajero)) {
             return Retorno.error4();
         } else {
 
-            listaPasajerSimple.agregarOrd(pasajero);
+            listaPasajeros.agregarOrd(pasajero);
 
             if (categoria == Categoria.PLATINO) {
                 listaPlatino.agregarOrd(pasajero);
@@ -74,7 +74,7 @@ public class ImplementacionSistema implements Sistema {
         if (cedula == null || !cedula.matches("^([1-9]\\.\\d{3}\\.\\d{3}-\\d|\\d{3}\\.\\d{3}-\\d)$")) {
             return Retorno.error1();
         }
-        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        Nodo<Pasajero> aux = listaPasajeros.getInicio();
         while (aux != null) {
             if (aux.getDato().getCedula().equals(cedula)) {
                 return Retorno.ok(aux.getDato().toString());
@@ -88,7 +88,7 @@ public class ImplementacionSistema implements Sistema {
     public Retorno listarPasajerosAscendente() {
 
         String pasajeros = "";
-        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        Nodo<Pasajero> aux = listaPasajeros.getInicio();
         while (aux != null) {
             if (!pasajeros.isEmpty()) {
                 pasajeros += "|";
@@ -103,7 +103,7 @@ public class ImplementacionSistema implements Sistema {
     public Retorno listarPasajerosDescendente() {
 
         Pila<Pasajero> pila = new Pila<>();
-        Nodo<Pasajero> aux = listaPasajerSimple.getInicio();
+        Nodo<Pasajero> aux = listaPasajeros.getInicio();
         while (aux != null) {
             pila.apilar(aux.getDato());
             aux = aux.getSiguiente();
@@ -122,19 +122,19 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno listarPasajerosPorCategoría(Categoria categoria) {
 
-        ListaNodosSimple<Pasajero> listaPasajeros;
+        ListaNodosSimple<Pasajero> listaPasajerosCat;
 
         if (categoria == Categoria.PLATINO) {
-            listaPasajeros = listaPlatino;
+            listaPasajerosCat = listaPlatino;
         } else if (categoria == Categoria.FRECUENTE) {
-            listaPasajeros = listaFrecuente;
+            listaPasajerosCat = listaFrecuente;
         } else if (categoria == Categoria.ESTANDAR) {
-            listaPasajeros = listaEstandar;
+            listaPasajerosCat = listaEstandar;
         } else {
-            listaPasajeros = listaEsporadico;
+            listaPasajerosCat = listaEsporadico;
         }
         String pasajeros = "";
-        Nodo<Pasajero> aux = listaPasajeros.getInicio();
+        Nodo<Pasajero> aux = listaPasajerosCat.getInicio();
         while (aux != null) {
             if (!pasajeros.isEmpty()) {
                 pasajeros += "|";
@@ -154,11 +154,11 @@ public class ImplementacionSistema implements Sistema {
             return Retorno.error1();
         }
 
-        if (listaAeropuertosSimple.existeElemento(aeropuerto)) {
+        if (listaAeropuertos.existeElemento(aeropuerto)) {
             return Retorno.error2();
         } else {
 
-            listaAeropuertosSimple.agregarInicio(aeropuerto);
+            listaAeropuertos.agregarInicio(aeropuerto);
             return Retorno.ok("Aeropuerto registrado exitosamente");
         }
     }
@@ -169,7 +169,7 @@ public class ImplementacionSistema implements Sistema {
         if (codigo == null || codigo.trim().isEmpty()) {
             return Retorno.error1();
         }
-        Aeropuerto aeropuerto = listaAeropuertosSimple.obtenerElemento(new Aeropuerto(codigo, ""));
+        Aeropuerto aeropuerto = listaAeropuertos.obtenerElemento(new Aeropuerto(codigo, ""));
         if (aeropuerto == null) {
             return Retorno.error2();
         }
@@ -190,21 +190,21 @@ public class ImplementacionSistema implements Sistema {
         }
 
         Aeropuerto aeropuertoOrigen = new Aeropuerto(codigoAeropuertoOrigen, "");
-        if (!listaAeropuertosSimple.existeElemento(aeropuertoOrigen)) {
+        if (!listaAeropuertos.existeElemento(aeropuertoOrigen)) {
             return Retorno.error3();
         }
 
         Aeropuerto aeropuertoDestino = new Aeropuerto(codigoAeropuertoDestino, "");
-        if (!listaAeropuertosSimple.existeElemento(aeropuertoDestino)) {
+        if (!listaAeropuertos.existeElemento(aeropuertoDestino)) {
             return Retorno.error4();
         }
 
         Vuelo vuelo = new Vuelo(codigoAeropuertoOrigen, codigoAeropuertoDestino, codigoDeVuelo, capacidad, costoEnDolares);
-        if (listaVuelosSimple.existeElemento(vuelo)) {
+        if (listaVuelos.existeElemento(vuelo)) {
             return Retorno.error5();
         }
 
-        listaVuelosSimple.agregarOrd(vuelo);
+        listaVuelos.agregarOrd(vuelo);
         return Retorno.ok("Vuelo registrado exitosamente");
 
     }
@@ -214,7 +214,7 @@ public class ImplementacionSistema implements Sistema {
         if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
             return Retorno.error1();
         }
-        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+        Nodo<Vuelo> aux = listaVuelos.getInicio();
         while (aux != null) {
             if (aux.getDato().getCodigoDeVuelo().equals(codigoDeVuelo)) {
                 return Retorno.ok(aux.getDato().toString());
@@ -231,7 +231,7 @@ public class ImplementacionSistema implements Sistema {
             return Retorno.error1();
         }
 
-        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+        Nodo<Vuelo> aux = listaVuelos.getInicio();
 
         while (aux != null) {
             if (aux.getDato().getCodigoDeVuelo().equals(codigoDeVuelo)) {
@@ -257,7 +257,7 @@ public class ImplementacionSistema implements Sistema {
         if (codigoDeVuelo == null || codigoDeVuelo.trim().isEmpty()) {
             return Retorno.error1();
         }
-        Nodo<Vuelo> aux = listaVuelosSimple.getInicio();
+        Nodo<Vuelo> aux = listaVuelos.getInicio();
         while (aux != null) {
             Vuelo vuelo = aux.getDato();
             if (vuelo.getCodigoDeVuelo().equals(codigoDeVuelo)) {
@@ -265,7 +265,7 @@ public class ImplementacionSistema implements Sistema {
                     return Retorno.error3();
                 }
                 vuelo.setEstado(Estado.CERRADO);
-                Aeropuerto aeropuertoOrigen = listaAeropuertosSimple.obtenerElemento(new Aeropuerto(vuelo.getCodigoAeropuertoOrigen(), ""));
+                Aeropuerto aeropuertoOrigen = listaAeropuertos.obtenerElemento(new Aeropuerto(vuelo.getCodigoAeropuertoOrigen(), ""));
                 aeropuertoOrigen.getVuelosPendientes().encolar(vuelo);
                 String confirmados = "";
                 Nodo<Pasajero> auxPas = vuelo.getPasajerosConfirmados().getInicio();
@@ -299,12 +299,12 @@ public class ImplementacionSistema implements Sistema {
         }
 
         Vuelo vueloBuscado = new Vuelo("", "", codigoDeVuelo, 1, 1);
-        Vuelo vuelo = listaVuelosSimple.obtenerElemento(vueloBuscado);
+        Vuelo vuelo = listaVuelos.obtenerElemento(vueloBuscado);
         if (vuelo == null) {
             return Retorno.error3();
         }
         Pasajero pasajeroBuscado = new Pasajero(cedula, "", 0, Categoria.ESPORADICO);
-        Pasajero pasajero = listaPasajerSimple.obtenerElemento(pasajeroBuscado);
+        Pasajero pasajero = listaPasajeros.obtenerElemento(pasajeroBuscado);
         if (pasajero == null) {
             return Retorno.error4();
         }
@@ -314,7 +314,7 @@ public class ImplementacionSistema implements Sistema {
         if (vuelo.tieneReserva(pasajero) || vuelo.tieneCheckIn(pasajero)) {
             return Retorno.error6();
         }
-        int limiteReservas = (int) Math.ceil(vuelo.getCapacidad() * 1.1); // Esta funcion se la pedi a Claude.
+        int limiteReservas = (int) Math.ceil(vuelo.getCapacidad() * 1.1); // Esta funcion se la pedi a la IA Claude
 
         if (vuelo.getPasajerosConReserva().cantidadElementos() >= limiteReservas) {
             return Retorno.error7();
@@ -334,12 +334,12 @@ public class ImplementacionSistema implements Sistema {
             return Retorno.error2();
         }
         Vuelo vueloBuscado = new Vuelo("", "", codigoDeVuelo, 1, 1);
-        Vuelo vuelo = listaVuelosSimple.obtenerElemento(vueloBuscado);
+        Vuelo vuelo = listaVuelos.obtenerElemento(vueloBuscado);
         if (vuelo == null) {
             return Retorno.error3();
         }
         Pasajero pasajeroBuscado = new Pasajero(cedula, "", 0, Categoria.ESPORADICO);
-        Pasajero pasajero = listaPasajerSimple.obtenerElemento(pasajeroBuscado);
+        Pasajero pasajero = listaPasajeros.obtenerElemento(pasajeroBuscado);
         if (pasajero == null) {
             return Retorno.error4();
         }
@@ -372,7 +372,7 @@ public class ImplementacionSistema implements Sistema {
         }
 
         Aeropuerto aeropuertoBuscado = new Aeropuerto(codigoAeropuerto, "");
-        Aeropuerto aeropuerto = listaAeropuertosSimple.obtenerElemento(aeropuertoBuscado);
+        Aeropuerto aeropuerto = listaAeropuertos.obtenerElemento(aeropuertoBuscado);
 
         if (aeropuerto == null) {
             return Retorno.error2();
