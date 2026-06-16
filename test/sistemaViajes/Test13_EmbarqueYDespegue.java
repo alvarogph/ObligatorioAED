@@ -10,7 +10,11 @@ public class Test13_EmbarqueYDespegue {
     private final Sistema s = new ImplementacionSistema();
 
     @Before
-    public void setUp() {
+    public void setUp() { //EN ESTA IMPLEMENTACIÓN NO INCLUÍ LOS TESTS DE LA CÁTEDRA PORQUE RECIBÍAN CODIGO DE VUELO Y NO DE AEROPUERTO 
+                          // COMO SOLICITABA LA LETRA.
+        
+        
+        
         s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");
@@ -56,4 +60,6 @@ public class Test13_EmbarqueYDespegue {
         retorno = s.embarqueYDespegueDeVuelo("EZE");
         assertEquals(Retorno.Resultado.ERROR_3, retorno.getResultado());
     }
+    
+  
 }

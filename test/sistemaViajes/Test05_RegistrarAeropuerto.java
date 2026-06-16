@@ -65,5 +65,28 @@ public class Test05_RegistrarAeropuerto {
         assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
     }
     
+    // TESTS CÁTEDRA
     
+//     @Test
+//    public void registrarAeropuertoOk() {
+//        retorno = s.registrarAeropuerto("MVD", "Aeropuerto de Carrasco");
+//        assertEquals(Retorno.Resultado.OK, retorno.getResultado());
+//    }
+//
+//    @Test
+//    public void registrarAeropuertoError01ParametrosInvalidos() {
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto(null, "Carrasco").getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto("MDV", null).getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto("", "Carrasco").getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto("MDV", "").getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto("   ", "Carrasco").getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.registrarAeropuerto("MVD", "   ").getResultado());
+//    }
+//
+//    @Test
+//    public void registrarAeropuertoError02CodigoRepetido() {
+//        s.registrarAeropuerto("MVD", "Aeropuerto de Carrasco");
+//        retorno = s.registrarAeropuerto("MVD", "Otro nombre");
+//        assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
+//    }
 }

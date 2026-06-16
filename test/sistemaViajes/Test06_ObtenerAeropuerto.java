@@ -59,5 +59,31 @@ public class Test06_ObtenerAeropuerto {
         retorno = s.obtenerAeropuerto("XXX");
         assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
     }
+    
+    
+    // TESTS CÁTEDRA - EN MIS TESTS LOS AEROPUERTOS ESTÁN REGISTRADOS EN EL setUp
+//    
+//     @Test
+//    public void obtenerAeropuertoOkSinVuelosEnCola() {
+//        s.registrarAeropuerto("MVD", "Aeropuerto de Carrasco");
+//
+//        retorno = s.obtenerAeropuerto("MVD");
+//
+//        assertEquals(Retorno.Resultado.OK, retorno.getResultado());
+//        assertEquals("MVD;Aeropuerto de Carrasco", retorno.getValorString());
+//        assertEquals(0, retorno.getValorEntero());
+//    }
+//
+//    @Test
+//    public void obtenerAeropuertoError01CodigoVacioONull() {
+//        assertEquals(Retorno.Resultado.ERROR_1, s.obtenerAeropuerto(null).getResultado());
+//        assertEquals(Retorno.Resultado.ERROR_1, s.obtenerAeropuerto("").getResultado());
+//    }
+//
+//    @Test
+//    public void obtenerAeropuertoError02NoExiste() {
+//        retorno = s.obtenerAeropuerto("EZE");
+//        assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
+//    }
 
 }
