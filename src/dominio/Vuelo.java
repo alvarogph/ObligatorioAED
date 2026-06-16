@@ -114,12 +114,12 @@ public class Vuelo implements Comparable<Vuelo> {
     @Override
     public String toString() {
 
-        return codigoAeropuertoOrigen + ";"
+        return codigoAeropuertoOrigen + ":"
                 + codigoAeropuertoDestino + ";"
                 + codigoDeVuelo + ";"
                 + capacidad + ";"
                 + costoEnDolares + ";"
-                + estado + ";"
+                + estado.getTexto() + ";"
                 + pasajerosConReserva.cantidadElementos() + ";"
                 + pasajerosConfirmados.cantidadElementos();
     }

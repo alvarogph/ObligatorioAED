@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class Test04_ListarPasajeros {
+public class Test04_ListarPasajeros { //Este test fue hecho antes que se subieran los test provistos por la cátedra, 
+                                        //por lo que no estan desagregados. Ascendente, Descendente y Por Categoría están aquí.
 
     private Retorno retorno;
     private final Sistema s = new ImplementacionSistema();
@@ -118,5 +119,4 @@ public class Test04_ListarPasajeros {
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
         assertEquals("3.335.321-2;Juan;45;Estándar|6.430.147-9;Nicolas;0;Estándar", retorno.getValorString());
     }
-
 }

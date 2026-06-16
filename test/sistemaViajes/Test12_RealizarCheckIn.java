@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class Test11_RealizarCheckIn {
+public class Test12_RealizarCheckIn {
 
     private Retorno retorno;
     private final Sistema s = new ImplementacionSistema();

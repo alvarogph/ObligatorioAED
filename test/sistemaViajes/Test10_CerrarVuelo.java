@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class Test09A_CerrarVuelo {
+public class Test10_CerrarVuelo {
 
     private Retorno retorno;
     private final Sistema s = new ImplementacionSistema();

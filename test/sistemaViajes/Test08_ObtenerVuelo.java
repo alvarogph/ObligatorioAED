@@ -21,7 +21,7 @@ public class Test08_ObtenerVuelo {
     public void obtenerInformacionDeVueloOk() {
         retorno = s.obtenerInformacionDeVuelo("LA100");
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
-        assertEquals("MVD;EZE;LA100;150;200;PROGRAMADO;0;0", retorno.getValorString());
+        assertEquals("MVD:EZE;LA100;150;200;Programado;0;0", retorno.getValorString());
     }
 
     @Test
@@ -39,4 +39,4 @@ public class Test08_ObtenerVuelo {
         retorno = s.obtenerInformacionDeVuelo("XX999");
         assertEquals(Retorno.Resultado.ERROR_2, retorno.getResultado());
     }
-}
+    }

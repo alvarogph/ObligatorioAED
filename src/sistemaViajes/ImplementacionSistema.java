@@ -395,57 +395,85 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno consultaDisponibilidad(int[][] matriz, int cantidad, Clase unaClase) {
 
-        if (cantidad <= 0) {
+         if (cantidad <= 0) {
             return Retorno.error1();
         }
-        int filaDesde;
-        int filaHasta;
-
-        if (unaClase == Clase.PRIMERA) {
-            filaDesde = 0;
-            filaHasta = 2;
-        } else if (unaClase == Clase.EJECUTIVA) {
-            filaDesde = 3;
-            filaHasta = 9;
-        } else {
-            filaDesde = 10;
-            filaHasta = 25;
-        }
-
-        int columnas = matriz[0].length;
-        char[] letrasColumna = {'A', 'B', 'C', 'D', 'E', 'F'};
         String resultado = "";
         int opcionesDispo = 0;
 
-        for (int i = filaDesde; i <= filaHasta; i++) {
-            int libresSeguidos = 0;
-            for (int j = 0; j < columnas; j++) {
-                if (matriz[i][j] == 0) {
-                    libresSeguidos++;
-                } else {
-                    libresSeguidos = 0;
-                }
-                if (libresSeguidos >= cantidad) {
-                    String opcion = "";
-                    for (int k = j - cantidad + 1; k <= j; k++) {
-                        char letra = letrasColumna[k];
-                        int numeroFila = i + 1;
-                        String asiento = letra + "" + numeroFila;
-                        if (!opcion.isEmpty()) {
-                            opcion += "-";
+        if (unaClase == Clase.PRIMERA) {
+            
+            int[] indicesColumnas = {0, 2, 3, 5};
+            char[] letrasColumna = {'A', 'C', 'D', 'F'};
+            int numColumnas = indicesColumnas.length;
+            
+            for (int i = 0; i <= 2; i++) {
+                int libresSeguidos = 0;
+                for (int j = 0; j < numColumnas; j++) {
+                    if (matriz[indicesColumnas[j]][i] == 0) {
+                        libresSeguidos++;
+                    } else if (matriz[indicesColumnas[j]][i] == 1) {
+                        libresSeguidos = 0;
+                    }
+                    if (libresSeguidos >= cantidad) {
+                        String opcion = "";
+                        for (int k = j - cantidad + 1; k <= j; k++) {
+                            char letra = letrasColumna[k];
+                            int numeroFila = i + 1;
+                            String asiento = letra + "" + numeroFila;
+                            if (!opcion.isEmpty()) {
+                                opcion += "-";
+                            }
+                            opcion += asiento;
                         }
-                        opcion += asiento;
+                        if (!resultado.isEmpty()) {
+                            resultado += "|";
+                        }
+                        resultado += opcion;
+                        opcionesDispo++;
                     }
-                    if (!resultado.isEmpty()) {
-                        resultado += "|";
+                }
+            }
+        } else {
+            int filaDesde;
+            int filaHasta;
+            if (unaClase == Clase.EJECUTIVA) {
+                filaDesde = 3;
+                filaHasta = 6;
+            } else {
+                filaDesde = 7;
+                filaHasta = 25;
+            }
+            int numColumnas = matriz.length;
+            char[] letrasColumna = {'A', 'B', 'C', 'D', 'E', 'F'};
+            for (int i = filaDesde; i <= filaHasta; i++) {
+                int libresSeguidos = 0;
+                for (int j = 0; j < numColumnas; j++) {
+                    if (matriz[j][i] == 0) {
+                        libresSeguidos++;
+                    } else if (matriz[j][i] == 1) {
+                        libresSeguidos = 0;
                     }
-                    resultado += opcion;
-                    opcionesDispo++;
+                    if (libresSeguidos >= cantidad) {
+                        String opcion = "";
+                        for (int k = j - cantidad + 1; k <= j; k++) {
+                            char letra = letrasColumna[k];
+                            int numeroFila = i + 1;
+                            String asiento = letra + "" + numeroFila;
+                            if (!opcion.isEmpty()) {
+                                opcion += "-";
+                            }
+                            opcion += asiento;
+                        }
+                        if (!resultado.isEmpty()) {
+                            resultado += "|";
+                        }
+                        resultado += opcion;
+                        opcionesDispo++;
+                    }
                 }
             }
         }
-        
         return Retorno.ok(resultado, opcionesDispo);
     }
-
 }
