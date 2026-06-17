@@ -35,8 +35,6 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno registrarPasajero(String cedula, String nombre, int edad, Categoria categoria) {
 
-        Pasajero pasajero = new Pasajero(cedula, nombre, edad, categoria);
-
         if (cedula == null || cedula.trim().isEmpty() || nombre == null || nombre.trim().isEmpty() || categoria == null) {
             return Retorno.error1();
         }
@@ -48,6 +46,8 @@ public class ImplementacionSistema implements Sistema {
         if (edad < 0) {
             return Retorno.error3();
         }
+
+        Pasajero pasajero = new Pasajero(cedula, nombre, edad, categoria);
 
         if (listaPasajeros.existeElemento(pasajero)) {
             return Retorno.error4();
@@ -395,18 +395,18 @@ public class ImplementacionSistema implements Sistema {
     @Override
     public Retorno consultaDisponibilidad(int[][] matriz, int cantidad, Clase unaClase) {
 
-         if (cantidad <= 0) {
+        if (cantidad <= 0) {
             return Retorno.error1();
         }
         String resultado = "";
         int opcionesDispo = 0;
 
         if (unaClase == Clase.PRIMERA) {
-            
+
             int[] indicesColumnas = {0, 2, 3, 5};
             char[] letrasColumna = {'A', 'C', 'D', 'F'};
             int numColumnas = indicesColumnas.length;
-            
+
             for (int i = 0; i <= 2; i++) {
                 int libresSeguidos = 0;
                 for (int j = 0; j < numColumnas; j++) {

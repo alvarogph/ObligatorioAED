@@ -10,13 +10,13 @@ public class Test09_AbrirVuelo {
     private final Sistema s = new ImplementacionSistema();
 
     @Before
-    public void setUp() { 
+    public void setUp() {
         s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");
         s.registrarVuelo("MVD", "EZE", "LA100", 150, 200);
         s.registrarVuelo("MVD", "EZE", "LA200", 100, 300);
-        
+
     }
 
     @Test
@@ -25,6 +25,13 @@ public class Test09_AbrirVuelo {
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
         retorno = s.abrirVuelo("LA200");
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
+    }
+
+    @Test
+    public void abrirVueloVerificaEstado() {
+        s.abrirVuelo("LA100");
+        retorno = s.obtenerInformacionDeVuelo("LA100");
+        assertEquals("MVD:EZE;LA100;150;200;Abierto;0;0", retorno.getValorString());
     }
 
     @Test
@@ -45,14 +52,13 @@ public class Test09_AbrirVuelo {
 
     @Test
     public void abrirVueloError03() {
-        
+
         s.abrirVuelo("LA100");
         retorno = s.abrirVuelo("LA100");
         assertEquals(Retorno.Resultado.ERROR_3, retorno.getResultado());
     }
-    
+
     // TESTS CÁTEDRA // AEROPUERTOS Y VUELOS DIFERENTES REGISTRADOS EN EL SET-UP
-    
 //    @Before
 //    public void setUp() {
 //        s.inicializarSistema();
@@ -60,7 +66,6 @@ public class Test09_AbrirVuelo {
 //        s.registrarAeropuerto("EZE", "Ezeiza");
 //        s.registrarVuelo("MVD", "EZE", "AR123", 120, 230);
 //    }
-    
 //    @Test
 //    public void abrirVueloOkCambiaEstado() {
 //        retorno = s.abrirVuelo("AR123");
@@ -80,4 +85,3 @@ public class Test09_AbrirVuelo {
 //        assertEquals(Retorno.Resultado.ERROR_3, s.abrirVuelo("AR123").getResultado());
 //    }
 }
-

@@ -29,6 +29,7 @@ public class Test06_ObtenerAeropuerto {
         assertEquals(0, retorno.getValorEntero());
     }
 
+    @Test
     public void obtenerAeropuertoOkConVuelosEnCola() {
         s.registrarVuelo("MVD", "EZE", "LA100", 10, 200);
         s.registrarVuelo("MVD", "EZE", "LA200", 10, 200);

@@ -10,8 +10,8 @@ public class Test12_RealizarCheckIn {
     private final Sistema s = new ImplementacionSistema();
 
     @Before
-    public void setUp() { 
-         s.inicializarSistema();
+    public void setUp() {
+        s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");
         s.registrarVuelo("MVD", "EZE", "LA100", 2, 200);
@@ -29,6 +29,13 @@ public class Test12_RealizarCheckIn {
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
         retorno = s.realizarCheckIn("LA100", "6.430.147-9");
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
+    }
+
+    @Test
+    public void realizarCheckInVerificaEstado() {
+        s.realizarCheckIn("LA100", "3.335.321-2");
+        retorno = s.obtenerInformacionDeVuelo("LA100");
+        assertEquals("MVD:EZE;LA100;2;200;Abierto;2;1", retorno.getValorString());
     }
 
     @Test
@@ -100,9 +107,8 @@ public class Test12_RealizarCheckIn {
         retorno = s.realizarCheckIn("LA100", "935.457-7");
         assertEquals(Retorno.Resultado.ERROR_8, retorno.getResultado());
     }
-    
+
     // TESTS CÁTEDRA
-    
 //     @Before
 //    public void setUp() {
 //        s.inicializarSistema();
@@ -140,5 +146,4 @@ public class Test12_RealizarCheckIn {
 //        assertEquals(Retorno.Resultado.ERROR_7, s.realizarCheckIn("AR123", "1.111.111-1").getResultado());
 //
 //    }
-
 }
