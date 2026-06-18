@@ -171,7 +171,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidadPrimeraClaseUnaOpcionLibrePrimeraFila() {
+    public void consultaDisponibilidadPrimeraClaseUnaOpcionLibrePrimeraFila() {
         /*
          * P primera
          * E ejecutiva
@@ -199,7 +199,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidadPrimeraClaseLlena() {
+    public void consultaDisponibilidadPrimeraClaseLlena() {
         /*
          * P primera
          * E ejecutiva
@@ -227,7 +227,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-  public  void consultaDisponibilidadPrimeraClaseParcialementeLlenaYCantidadEs1() {
+    public void consultaDisponibilidadPrimeraClaseParcialementeLlenaYCantidadEs1() {
         /*
          * P primera
          * E ejecutiva
@@ -255,7 +255,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidad_claseEjecutivaLibreYCantidadEs6() {
+    public void consultaDisponibilidad_claseEjecutivaLibreYCantidadEs6() {
         /*
          * P primera
          * E ejecutiva
@@ -284,7 +284,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidad_claseEjecutivaSoloConCuatroCombinacionesYCantidadEs3() {
+    public void consultaDisponibilidad_claseEjecutivaSoloConCuatroCombinacionesYCantidadEs3() {
         /*
          * P primera
          * E ejecutiva
@@ -313,7 +313,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila4YCantidadEs3() {
+    public void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila4YCantidadEs3() {
         /*
          * P primera
          * E ejecutiva
@@ -342,7 +342,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-  public  void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila5YCantidadEs4() {
+    public void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila5YCantidadEs4() {
         /*
          * P primera
          * E ejecutiva
@@ -371,7 +371,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila7YCantidadEs2() {
+    public void consultaDisponibilidad_claseEjecutivaSoloConUnaCombinacionDisponibleEnFila7YCantidadEs2() {
         /*
          * P primera
          * E ejecutiva
@@ -400,7 +400,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-   public void consultaDisponibilidad_claseEjecutivaParcialementeLlenaYCantidadEs1() {
+    public void consultaDisponibilidad_claseEjecutivaParcialementeLlenaYCantidadEs1() {
         /*
          * P primera
          * E ejecutiva
@@ -428,7 +428,7 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
     }
 
     @Test
-  public  void consultaDisponibilidad_claseTuristaLibreYCantidadEs6() {
+    public void consultaDisponibilidad_claseTuristaLibreYCantidadEs6() {
         /*
          * P primera
          * E ejecutiva
@@ -464,9 +464,9 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
         assertEquals(19, retorno.getValorEntero());
 
     }
-
-    @Test
-  public  void consultaDisponibilidad_claseTuristaSoloConCuatroCombinacionesYCantidadEs3() {
+    
+     @Test
+    public void consultaDisponibilidad_claseTuristaSoloConCuatroCombinacionesYCantidadEs3() {
         /*
          * P primera
          * E ejecutiva
@@ -474,16 +474,16 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
          */
 
         final int[][] asientos = {
-            //    1  2  3          4  5  6  7          8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
-            //    P  P  P  /* - */ E  E  E  E  /* - */ T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T
-            /*A*/{D, D, D, /* - */ O, O, D, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
-            /*B*/ {N, N, N, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
-            /*C*/ {D, D, D, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
-            /*D*/ {D, D, D, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
-            /*E*/ {N, N, N, /* - */ D, O, O, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
-            /*F*/ {D, D, D, /* - */ O, O, O, O, /* - */ O, O, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O}
+                //    1  2  3          4  5  6  7          8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+                //    P  P  P  /* - */ E  E  E  E  /* - */ T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T
+                /*A*/{D, D, D, /* - */ O, O, D, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
+                /*B*/{N, N, N, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
+                /*C*/{D, D, D, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
+                /*D*/{D, D, D, /* - */ D, O, D, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
+                /*E*/{N, N, N, /* - */ D, O, O, O, /* - */ O, D, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O},
+                /*F*/{D, D, D, /* - */ O, O, O, O, /* - */ O, O, O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O}
         };
-
+        
         retorno = s.consultaDisponibilidad(asientos, 3, Clase.TURISTA);
 
         String respuestaEsperada = "B9-C9-D9|C9-D9-E9|C17-D17-E17|D17-E17-F17";
@@ -491,11 +491,11 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
         assertEquals(respuestaEsperada, retorno.getValorString());
         assertEquals(4, retorno.getValorEntero());
-
+       
     }
-
+    
     @Test
-  public  void consultaDisponibilidad_claseTuristaParcialementeLlenaYCantidadEs1() {
+    public void consultaDisponibilidad_claseTuristaParcialementeLlenaYCantidadEs1() {
         /*
          * P primera
          * E ejecutiva
@@ -503,14 +503,15 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
          */
 
         final int[][] asientos = {
-            //    1  2  3          4  5  6  7          8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
-            //    P  P  P  /* - */ E  E  E  E  /* - */ T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T
-            /*A*/{O, D, O, /* - */ O, O, O, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
-            /*B*/ {N, N, N, /* - */ O, D, O, O, /* - */ O, O, D, O, O, O, O, O, D, O, O, O, O, O, O, D, O, O, O},
-            /*C*/ {O, D, D, /* - */ O, O, D, O, /* - */ O, O, O, O, D, O, O, O, O, D, O, O, O, D, O, O, O, O, O},
-            /*D*/ {D, O, D, /* - */ D, O, O, D, /* - */ O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O, D, O},
-            /*E*/ {N, N, N, /* - */ O, D, O, D, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
-            /*F*/ {D, D, O, /* - */ D, O, D, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},};
+                //    1  2  3          4  5  6  7          8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+                //    P  P  P  /* - */ E  E  E  E  /* - */ T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T  T
+                /*A*/{O, D, O, /* - */ O, O, O, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
+                /*B*/{N, N, N, /* - */ O, D, O, O, /* - */ O, O, D, O, O, O, O, O, D, O, O, O, O, O, O, D, O, O, O},
+                /*C*/{O, D, D, /* - */ O, O, D, O, /* - */ O, O, O, O, D, O, O, O, O, D, O, O, O, D, O, O, O, O, O},
+                /*D*/{D, O, D, /* - */ D, O, O, D, /* - */ O, O, O, O, O, O, O, D, O, O, O, O, O, O, O, O, O, D, O},
+                /*E*/{N, N, N, /* - */ O, D, O, D, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
+                /*F*/{D, D, O, /* - */ D, O, D, O, /* - */ O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O},
+        };
 
         retorno = s.consultaDisponibilidad(asientos, 1, Clase.TURISTA);
 
@@ -519,7 +520,6 @@ public class Test14_ConsultaDisponibilidad { //Estos comentados son los test ini
         assertEquals(Retorno.Resultado.OK, retorno.getResultado());
         assertEquals(respuestaEsperada, retorno.getValorString());
         assertEquals(8, retorno.getValorEntero());
-
+                   
     }
-
 }

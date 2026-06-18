@@ -10,7 +10,7 @@ public class Test11_RealizarReserva {
     private final Sistema s = new ImplementacionSistema();
 
     @Before
-    public void setUp() { //HACER NUEVOS TESTS CUANDO ESTE PRONTO REALIZAR RESERVA Y REALIZAR CHECK-IN.
+    public void setUp() { 
         s.inicializarSistema();
         s.registrarAeropuerto("MVD", "Carrasco");
         s.registrarAeropuerto("EZE", "Ministro Pistarini");
